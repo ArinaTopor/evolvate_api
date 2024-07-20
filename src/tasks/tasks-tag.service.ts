@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Task } from './entities/task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TaskTag } from './entities/tag.entity';
 
 
 @Injectable() 
-export class TasksService {
+export class TaskTagService {
   constructor(
-    @InjectRepository(Task) private taskRepository: Repository<Task>, ) {}
+    @InjectRepository(TaskTag) private taskTagRepository: Repository<TaskTag>,  ) {}
 
-  findAllTasks() {
-    return this.taskRepository.find();
+  findAllTags() {
+    return this.taskTagRepository.find();
   }
 }

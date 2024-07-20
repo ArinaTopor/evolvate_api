@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, JoinTable, OneToMany } from "typeorm";
 import { TaskTag } from "./tag.entity";
+import { TaskUser } from "./task_user";
 
 @Entity()
 export class Task {
@@ -27,7 +28,10 @@ export class Task {
     @Column()
     score: number;
 
-    @OneToOne(() => TaskTag, taskTag => taskTag.name, {cascade: true}) 
-    @JoinColumn()
-    tag_: TaskTag;
+    @OneToOne(() => TaskTag, taskTag => taskTag.id) 
+    @JoinTable()
+    tag: TaskTag;
+
+    @OneToMany(type => TaskUser, taskUser => taskUser.task)
+    task_user: TaskUser[];
 }

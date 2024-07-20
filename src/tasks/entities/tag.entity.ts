@@ -1,5 +1,4 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Task } from "./task.entity";
 
 @Entity()
 export class TaskTag {
@@ -10,5 +9,9 @@ export class TaskTag {
     name: string;
 
     @Column()
+    color_id: string;
+
+    @Column()
     image: string;
+
 }

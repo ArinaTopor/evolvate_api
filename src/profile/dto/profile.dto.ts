@@ -4,7 +4,7 @@ export class CreateProfileDto {
 	readonly first_name: string;
 	readonly email: string;
 	readonly phone: string;
-	readonly division_id: number;
+	readonly division_id: any;
 	readonly division: string;
 	readonly position: string;
 }
