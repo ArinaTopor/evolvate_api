@@ -76,3 +76,4 @@ Nest is [MIT licensed](LICENSE).
 Авторизация, регистрация - auth.controller
 Работа с задачами - tasks.controller
 Работа с продуктами - products.controller
+Получение подразделений - profile.controller

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
   import { ProfileService } from './profile.service';
 import { CreateProfileDto } from './dto/profile.dto';
 import { Profile } from './entites/profile.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
   
@@ -19,11 +20,12 @@ import { Profile } from './entites/profile.entity';
       return this.profileService.getAllProfiles();
     }
 
+    //Получение всех подразделений
     @Get('/division')
     getAllDivisions(){
       return this.profileService.getAllDivisions();
     }
-
+    
     @Get('/division_name')
     getIdDivisionByName(@Param('name') name: string){
       return this.profileService.getIdDivisionByName(name);

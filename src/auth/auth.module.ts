@@ -11,7 +11,7 @@ import { ProfileModule } from 'src/profile/profile.module';
   imports: [  forwardRef(() => UserModule),
     JwtModule.register({
         secret: process.env.KEY || 'Secret',
-    }), ProfileModule
+    }), forwardRef(() => ProfileModule)
   ],
   exports: [ AuthService, JwtModule ]
 })
