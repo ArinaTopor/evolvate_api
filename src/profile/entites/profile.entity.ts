@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { User } from 'src/user/entities/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
 
@@ -5,35 +6,49 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BeforeIns
 @Entity()
 export class Profile {
 
+    @ApiProperty({example: "", description:"Id"})
     @PrimaryGeneratedColumn('increment')
 	id: number; 
 
+    @ApiProperty({example: "", description:"Id профиля"})
     @Column()	
 	user_id: number; 
-    
+
+    @ApiProperty({example: "", description:"Фамилия"})
     @Column()	
 	last_name: string;
     
+    @ApiProperty({example: "", description:"Имя"})
     @Column()	
 	first_name: string;
 
+    @ApiProperty({example: "", description:"Отчество"})
     @Column()
     middle_name: string;
 
+    @ApiProperty({example: "", description:"Почта"})
     @Column()	
 	email: string;
 
+    @ApiProperty({example: "", description:"Телефон"})
     @Column()	
 	phone: string;
 
+    @ApiProperty({example: "", description:"Id подразделения"})
     @Column()	
 	division_id: number;
 
+    @ApiProperty({example: "", description:"Название подразделения"})
     @Column()	
 	division: string;
 
+    @ApiProperty({example: "", description:"Должность"})
     @Column()	
 	position: string;
+
+    @ApiProperty({example: "", description:"Количество монет"})
+    @Column()
+    coins_count: number;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 	created_at: number;	
@@ -41,6 +56,7 @@ export class Profile {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 	updated_at: number;	
 
+    @ApiProperty({example: "", description:"ФИО"})
     @Column()	
 	full_name: string;	
 

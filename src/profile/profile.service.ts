@@ -11,7 +11,7 @@ export class ProfileService {
   constructor(@InjectRepository(Profile) private profileRepository: Repository<Profile>, @InjectRepository(Division) private divisionRepository: Repository<Division>,) {}
     
   async createProfile(profileDto: CreateProfileDto): Promise<Profile> {
-    const profile = this.profileRepository.create();
+    const profile = this.profileRepository.create(profileDto);
     return await this.profileRepository.save(profile);
   }
     

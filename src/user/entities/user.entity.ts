@@ -1,4 +1,5 @@
 
+import { ApiProperty } from '@nestjs/swagger';
 import { Profile } from 'src/profile/entites/profile.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, OneToMany, JoinTable, BeforeInsert, BeforeUpdate } from 'typeorm';
 
@@ -6,21 +7,27 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 @Entity()
 export class User {
 
+  @ApiProperty({example: "", description:"Id"})
   @PrimaryGeneratedColumn('increment')
   id: number;
 
+  @ApiProperty({example: "", description:"Никнейм"})
   @Column() 
 	username: string;
 
+  @ApiProperty({example: "", description:"Ключ"})
   @Column()
   auth_key: string; //32
 
+  @ApiProperty({example: "", description:"Пароль"})
   @Column()	
 	password_hash: string;	
 
+  @ApiProperty({example: "", description:"Почта"})
   @Column()	
 	email: string;
 
+  @ApiProperty({example: "", description:"Статус"})
   @Column()	
 	status: number;	
 
@@ -39,12 +46,13 @@ export class User {
         this.auth_key = key;
     }
 
-    @BeforeUpdate()
-    public beforeUpdate() {
-        const now = Math.round(new Date().getTime() / 1000);
-        this.updated_at = now;
-    }
-  
+  @BeforeUpdate()
+  public beforeUpdate() {
+      const now = Math.round(new Date().getTime() / 1000);
+      this.updated_at = now;
+  }
+    
+  @ApiProperty({example: "", description:"Профиль"})
   @OneToOne(() => Profile, profile => profile.user)
   profile: Profile[];
 

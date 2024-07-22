@@ -77,7 +77,7 @@ export class AuthService {
         // Сохранение профиля в базе данных
         const savedProfile = await this.profileService.createProfile(profile);
     
-        return this.generateUserToken(savedUser), this.generateProfileToken(savedProfile);
+        return this.generateUserToken(savedUser);
       }
 
 }

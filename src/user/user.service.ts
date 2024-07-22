@@ -23,7 +23,7 @@ export class UserService {
   }
 
   async getUserById(id: number) {
-    const user = this.userRepository.findOne({where: { id }})
+    const user = this.userRepository.findOne({where: { id }, relations: {profile: true}})
 
     return user;
   }

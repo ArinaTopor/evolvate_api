@@ -4,8 +4,9 @@ import { ProductController } from './products.controller';
 import { ProDuctService } from './products.service';
 import { Product } from './entity/products.entity';
 import { ProductImage } from './entity/product-image.entity';
-import { Variant } from './entity/variant.dto';
 import { AuthModule } from 'src/auth/auth.module';
+import { Variant } from './entity/variant.entity';
+import { Cart } from './entity/cart.entity';
 
 
 
@@ -13,6 +14,6 @@ import { AuthModule } from 'src/auth/auth.module';
 @Module({
   controllers: [ProductController],
   providers: [ProDuctService],
-  imports: [TypeOrmModule.forFeature([Product, ProductImage, Variant]), AuthModule],
+  imports: [TypeOrmModule.forFeature([Product, ProductImage, Variant, Cart]), AuthModule],
 })
 export class ProductModule {}

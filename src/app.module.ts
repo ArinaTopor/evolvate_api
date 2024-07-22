@@ -13,7 +13,8 @@ import { ProductModule } from './products/products.model';
 import { Product } from './products/entity/products.entity';
 import { ProductImage } from './products/entity/product-image.entity';
 import { Division } from './profile/entites/division.entity';
-import { Variant } from './products/entity/variant.dto';
+import { Variant } from './products/entity/variant.entity';
+import { Cart } from './products/entity/cart.entity';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { Variant } from './products/entity/variant.dto';
       username: 'root',
       password: '',
       database: 'evo',
-      entities: [User , Task, TaskTag, Profile, TaskUser, Product, ProductImage, Division, Variant],
+      entities: [User , Task, TaskTag, Profile, TaskUser, Product, ProductImage, Division, Variant, Cart],
       synchronize: false,
     }),
     UserModule,
