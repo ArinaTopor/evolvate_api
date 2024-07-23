@@ -1,23 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, OneToMany, JoinColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
-import { Product } from './products.entity';
+import { Entity, Column, PrimaryGeneratedColumn,  } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 
 @Entity()
 export class Cart {
-    @ApiProperty({example: "", description:"Id"})
+    @ApiProperty({ description: "Id" })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ApiProperty({example: "", description:"ID пользователя"})
+    @ApiProperty({ description: "ID пользователя" })
     @Column()
     user_id: number;
 
-    @ApiProperty({example: "", description:"ID продукта"})
+    @ApiProperty({ description: "ID продукта" })
     @Column()
     product_id: number;
 
-    @ApiProperty({example: "", description:"ID варианта"})
+    @ApiProperty({ description: "ID варианта" })
     @Column()
     variant_id: number;
 

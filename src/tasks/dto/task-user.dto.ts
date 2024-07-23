@@ -1,18 +1,22 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNumber, IsString } from "class-validator";
 
-export class UserTaskDto{
-    @ApiProperty({example: "", description:"Id"})
+export class UserTaskDto {
+    @ApiProperty({ description:"Id" })
     id: number;
-    @ApiProperty({example: "", description:"Изображение"})
+    @ApiProperty({ description:"Изображение" })
     image: string;
-    @ApiProperty({example: "", description:"Видео"})
+    @ApiProperty({ description:"Видео" })
     video: string;
-    @ApiProperty({example: "", description:"Сообщение"})
+    @ApiProperty({ description:"Сообщение" })
     message: string; 
-    @ApiProperty({example: "", description:"Статус"})
-    status: string;
-    @ApiProperty({example: "", description:"Id задания"})
+    @IsNumber()
+    @ApiProperty({ description:"Статус" })
+    status: number;
+    @IsNumber()
+    @ApiProperty({ description:"Id задания" })
     task_id: number;
-    @ApiProperty({example: "", description:"Id пользователя"})
+    @IsNumber()
+    @ApiProperty({ description:"Id пользователя" })
     user_id: number;
 }

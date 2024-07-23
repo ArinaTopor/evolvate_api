@@ -11,33 +11,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 export class ProfileController {
   constructor(private readonly profileService: ProfileService, ) {}
 
-  @ApiOperation({summary: 'Создание профиля (для разработки)'})
-  @Post()
-  create(@Body() dto: CreateProfileDto) {
-    return this.profileService.createProfile(dto);
-  }
-  
-  @ApiOperation({summary: 'Получение всех профилей (для разработки)'})
-  @Get()
-  getAll() {
-    return this.profileService.getAllProfiles();
-  }
-
   @ApiOperation({summary: 'Получение подразделений'})
   @Get('/division')
   getAllDivisions(){
     return this.profileService.getAllDivisions();
-  }
-  
-  @ApiOperation({summary: 'Получение пользователя по почте (для разработки)'})
-  @Get(':user_id')
-  getProfileById(@Param('user_id') user_id: number) {
-    return this.profileService.getProfileById(user_id);
-  }
-  
-  @ApiOperation({summary: 'Удаление профиля (для разработки)'})
-  @Delete(':id')
-  removeProfile(@Param('id') id: number) {
-    return this.profileService.removeProfile(id);
   }
 }

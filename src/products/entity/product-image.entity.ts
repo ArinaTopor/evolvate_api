@@ -1,15 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, OneToMany, JoinColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Product } from './products.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 
 @Entity()
 export class ProductImage {
-    @ApiProperty({example: "", description:"ID"})
+    @ApiProperty({ description: "ID" })
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty({example: "", description:"Изображение"})
+    @ApiProperty({ description: "Изображение" })
     @Column()
     image: string;
 

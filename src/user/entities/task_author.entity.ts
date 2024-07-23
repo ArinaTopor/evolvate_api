@@ -1,17 +1,21 @@
-import { LargeNumberLike } from "crypto";
-import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from "@nestjs/swagger";
+import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class TaskAuthor {
+    @ApiProperty({ description:"Id" })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
+    @ApiProperty({ description: "Id задания" })
     @Column()
     task_id: number;
 
+    @ApiProperty({ description: "Id пользователя" })
     @Column()
     user_id: number;
 
+    @ApiProperty({ description: "Id задания пользователя"})
     @Column()
     task_user_id: number;
 
@@ -19,7 +23,7 @@ export class TaskAuthor {
 	created_at: number;	
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-        updated_at: number;	
+    updated_at: number;	
 
     @BeforeInsert()
     public beforeInsert() {

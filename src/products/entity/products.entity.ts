@@ -1,29 +1,27 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ProductImage } from './product-image.entity';
 import { Variant } from './variant.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
-
-
 @Entity()
 export class Product {
-    @ApiProperty({example: "", description:"ID"})
+    @ApiProperty({ description: "ID" })
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty({example: "", description:"Название"})
+    @ApiProperty({ description: "Название" })
     @Column()
     name: string;
 
-    @ApiProperty({example: "", description:"Описание"})
+    @ApiProperty({ description: "Описание" })
     @Column()
     description: string;
 
-    @ApiProperty({example: "", description:"Баланс?"})
+    @ApiProperty({ description: "Баланс" })
     @Column()
     balance: number;
 
-    @ApiProperty({example: "", description:"Цена"})
+    @ApiProperty({ description: "Цена" })
     @Column()
     price: number;
 
@@ -36,5 +34,4 @@ export class Product {
 
     @OneToMany(type => Variant, variant => variant.product)
     variant: Variant[];
-
 }

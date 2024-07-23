@@ -1,30 +1,30 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, JoinTable, ManyToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
 import { Task } from "./task.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class TaskUser {
-    @ApiProperty({example: "", description:"Id"})
+    @ApiProperty({ description: "Id" })
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty({example: "", description:"Изображение"})
+    @ApiProperty({ description: "Изображение" })
     @Column()
     image: string;
 
-    @ApiProperty({example: "", description:"Видео"})
+    @ApiProperty({ description: "Видео" })
     @Column()
     video: string;
 
-    @ApiProperty({example: "", description:"Сообщение"})
+    @ApiProperty({ description: "Сообщение" })
     @Column()
     message: string; 
 
-    @ApiProperty({example: "", description:"Статус"})
+    @ApiProperty({ description: "Статус" })
     @Column()
-    status: string;
+    status: number;
 
-    @ApiProperty({example: "", description:"Id задания"})
+    @ApiProperty({ description: "Id задания" })
     @Column()
     task_id: number;
 

@@ -1,37 +1,39 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, JoinTable, OneToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinTable, OneToMany } from "typeorm";
 import { TaskTag } from "./tag.entity";
 import { TaskUser } from "./task_user";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Task {
-    @ApiProperty({example: "", description:"Id"})
+    @ApiProperty({ description: "Id" })
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty({example: "", description:"Id типа задания"})
+    @ApiProperty({ description: "Id типа задания" })
     @Column()
     type_id: number;
 
-    @ApiProperty({example: "", description:"Id категории"})
+    @ApiProperty({ description: "Id категории" })
     @Column()
     tag_id: number;
 
+    @ApiProperty({ description: "Одиночное/командное задание" })
     @Column()
     is_solo: number;
 
-    @ApiProperty({example: "", description:"Название"})
+    @ApiProperty({ description: "Название" })
     @Column()
     name: string;
 
-    @ApiProperty({example: "", description:"Описание"})
+    @ApiProperty({ description: "Описание" })
     @Column()
     description: string;
 
-    @ApiProperty({example: "", description:"Статус"})
+    @ApiProperty({ description: "Статус" })
     @Column()
     status: number;
-
+    
+    @ApiProperty({ description: "Счет" })
     @Column()
     score: number;
 

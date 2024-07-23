@@ -17,16 +17,20 @@ import { Variant } from './products/entity/variant.entity';
 import { Cart } from './products/entity/cart.entity';
 import { UserToken } from './user/entities/user-token.entity';
 import { TaskAuthor } from './user/entities/task_author.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env'
+   }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'evo',
+      host: process.env.MYSQL_HOST,
+      port: Number(process.env.MYSQL_PORT),
+      username: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
       entities: [User , Task, TaskTag, Profile, TaskUser, Product, ProductImage, Division, Variant, Cart, UserToken, TaskAuthor],
       synchronize: false,
     }),

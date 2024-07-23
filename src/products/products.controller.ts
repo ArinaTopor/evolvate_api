@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { ProDuctService } from './products.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CreateCartDto } from './cart.dto';
+import { CreateCartDto } from './dto/cart.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Продукты')

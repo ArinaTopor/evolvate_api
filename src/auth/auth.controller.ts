@@ -1,16 +1,12 @@
 import { Body, Controller, Headers, Ip, Post } from "@nestjs/common";
-import { CreateUserDto } from "src/user/dto/create-user.dto";
 import { AuthService } from "./auth.service";
-import { CreateProfileDto } from "src/profile/dto/profile.dto";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { User } from "src/user/entities/user.entity";
 import { CreateLoginDto } from "./dto/login.dto";
 import { CreateRegistrationDto } from "./dto/registration.dto";
 
 @ApiTags('Регистарция и авторизация')
 @Controller('auth')
-export class AuthController {
-
+export class AuthController { 
     constructor(private readonly authService: AuthService) {}
 
     @ApiOperation({summary: 'Авторизация'})

@@ -5,48 +5,47 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, BeforeIns
 
 @Entity()
 export class Profile {
-
-    @ApiProperty({example: "", description:"Id"})
+    @ApiProperty({ description: "Id" })
     @PrimaryGeneratedColumn('increment')
 	id: number; 
 
-    @ApiProperty({example: "", description:"Id профиля"})
+    @ApiProperty({ description: "Id профиля" })
     @Column()	
 	user_id: number; 
 
-    @ApiProperty({example: "", description:"Фамилия"})
+    @ApiProperty({ description: "Фамилия" })
     @Column()	
 	last_name: string;
     
-    @ApiProperty({example: "", description:"Имя"})
+    @ApiProperty({ description: "Имя" })
     @Column()	
 	first_name: string;
 
-    @ApiProperty({example: "", description:"Отчество"})
+    @ApiProperty({ description: "Отчество" })
     @Column()
     middle_name: string;
 
-    @ApiProperty({example: "", description:"Почта"})
+    @ApiProperty({ description: "Почта" })
     @Column()	
 	email: string;
 
-    @ApiProperty({example: "", description:"Телефон"})
+    @ApiProperty({ description: "Телефон" })
     @Column()	
 	phone: string;
 
-    @ApiProperty({example: "", description:"Id подразделения"})
+    @ApiProperty({ description: "Id подразделения" })
     @Column()	
 	division_id: number;
 
-    @ApiProperty({example: "", description:"Название подразделения"})
+    @ApiProperty({ description: "Название подразделения" })
     @Column()	
 	division: string;
 
-    @ApiProperty({example: "", description:"Должность"})
+    @ApiProperty({ description: "Должность" })
     @Column()	
 	position: string;
 
-    @ApiProperty({example: "", description:"Количество монет"})
+    @ApiProperty({ description: "Количество монет" })
     @Column()
     coins_count: number;
 
@@ -56,7 +55,7 @@ export class Profile {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 	updated_at: number;	
 
-    @ApiProperty({example: "", description:"ФИО"})
+    @ApiProperty({ description: "ФИО" })
     @Column()	
 	full_name: string;	
 

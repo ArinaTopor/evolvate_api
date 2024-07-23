@@ -1,25 +1,38 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsMobilePhone, IsNumber, IsString } from "class-validator";
 
 export class CreateRegistrationDto {
-    @ApiProperty({example: "", description:"Ник"})
+    @IsString()
+    @ApiProperty({ description: "Ник" })
     readonly username: string;
-    @ApiProperty({example: "", description:"Пароль"})
+    @IsString()
+    @ApiProperty({ description: "Пароль" })
     readonly password: string;
-    @ApiProperty({example: "", description:"Фамилия"})
+    @IsString()
+    @ApiProperty({ description: "Фамилия" })
     readonly last_name: string; 
-    @ApiProperty({example: "", description:"Имя"})
+    @IsString()
+    @ApiProperty({ description: "Имя" })
     readonly first_name: string;
-    @ApiProperty({example: "", description:"Отчество"})
+    @IsString()
+    @ApiProperty({ description: "Отчество" })
     readonly middle_name: string;
-    @ApiProperty({example: "", description:"Почта"})
+    @IsString()
+    @IsEmail()
+    @ApiProperty({ description: "Почта" })
     readonly email: string; 
-    @ApiProperty({example: "", description:"Телефон"})
+    @IsString()
+    @IsMobilePhone("ru-RU")
+    @ApiProperty({ description: "Телефон" })
     readonly phone: string;
-    @ApiProperty({example: "", description:"ID подразделения"})
+    @IsNumber()
+    @ApiProperty({ description: "ID подразделения" })
     readonly division_id: number;
-    @ApiProperty({example: "", description:"Название подразделения"})
+    @IsString()
+    @ApiProperty({ description: "Название подразделения" })
     readonly division: string;
-    @ApiProperty({example: "", description:"Должность"})
+    @IsString()
+    @ApiProperty({ description: "Должность" })
     readonly position: string;
     readonly ip: string;
     readonly user_agent: string;

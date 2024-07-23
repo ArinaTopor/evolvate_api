@@ -29,10 +29,4 @@ export class TasksController {
   findAllTags() {
     return this.tasksService.findAllTags();
   }
-
-  @ApiOperation({summary: 'Получение всех выполненных задач (для разработки)'})
-  @Get('/task_user')
-  getAllTasksUser() {
-    return this.tasksService.getAllTasksUser();
-  }
 }

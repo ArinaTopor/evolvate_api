@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, OneToMany, JoinColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 
 @Entity()
 export class Division {
-    @ApiProperty({example: "", description:"Id"})
+    @ApiProperty({ description: "Id" })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ApiProperty({example: "", description:"Название"})
+    @ApiProperty({ description: "Название" })
     @Column()
     name: string;
 }

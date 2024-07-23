@@ -14,25 +14,16 @@ export class ProfileService {
     const profile = this.profileRepository.create(profileDto);
     return await this.profileRepository.save(profile);
   }
-    
-  async getAllProfiles() {
-    return this.profileRepository.find();
-  }
 
   async getAllDivisions() {
     return this.divisionRepository.find();
   }
-
-  async getIdDivisionByName( name: string ) {
-    const division = this.divisionRepository.findOne({where: { name }})
-    return (await division).id;
-  }
     
-  getProfileById( user_id: number ) {
+  async getProfileById( user_id: number ) {
     return this.profileRepository.findOne({where: { user_id }});
   }
 
-  async removeProfile(id: number) {
-    await this.profileRepository.delete(id);
+  async removeProfile(email: string) {
+    await this.profileRepository.delete(email);
   }
 }

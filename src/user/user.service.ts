@@ -10,32 +10,31 @@ import { TaskAuthor } from './entities/task_author.entity';
 
 @Injectable()
 export class UserService {
-
   constructor( @InjectRepository(User) private userRepository: Repository<User>, @InjectRepository(UserToken) private userTokenRepository: Repository<UserToken>, 
   private readonly tasksService: TasksService, @InjectRepository(TaskAuthor) private taskAuthorRepository: Repository<TaskAuthor>) {}
 
-
   async createUser(userDto: CreateUserDto): Promise<User> {
-    const user = this.userRepository.create(userDto);
-    const savedUser = await this.userRepository.save(user)
-    const tasks = this.tasksService.findAllTasks()
-    for (const task of await(tasks)) {
-      const taskAuthor = this.taskAuthorRepository.create({
-          task_id: task.id,
-          user_id: savedUser.id
-      });
-      await this.taskAuthorRepository.save(taskAuthor);
-  }
-    return savedUser;
+    try {    
+      const user = this.userRepository.create(userDto);
+      const savedUser = await this.userRepository.save(user)
+      const tasks = this.tasksService.findAllTasks()
+      for (const task of await(tasks)) {
+        const taskAuthor = this.taskAuthorRepository.create({
+            task_id: task.id,
+            user_id: savedUser.id
+        });
+        await this.taskAuthorRepository.save(taskAuthor);
+      }
+      return savedUser;
+    }  
+    catch (error) {
+      throw error;
+    }
   }
 
   async createUserToken(userTokenDto: CreateUserTokenDto): Promise<UserToken> {
     const userToken = this.userTokenRepository.create(userTokenDto);
     return await this.userTokenRepository.save(userToken);
-  }
-
-  async getAllUsers() {
-    return this.userRepository.find({relations: {profile: true}});
   }
 
   async getUserById(id: number) {
@@ -58,8 +57,8 @@ export class UserService {
     return user;
   }
 
-  async removeUser(id: number) {
-    await this.userRepository.delete(id);
+  async removeUser(email: string) {
+    await this.userRepository.delete(email);
   }
 }
 

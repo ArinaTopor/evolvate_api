@@ -1,23 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Profile } from 'src/profile/entites/profile.entity';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, OneToMany, JoinTable, BeforeInsert, BeforeUpdate } from 'typeorm';
-import { User } from './user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert} from 'typeorm';
 
 
 @Entity()
 export class UserToken {
+    @ApiProperty({ description: "Id" })
     @PrimaryGeneratedColumn('increment')
     id: number;
 
+    @ApiProperty({ description: "Id пользователя" })
     @Column()
     user_id: number;
 
+    @ApiProperty({ description: "Refresh Token" })
     @Column()
     token: string;
 
+    @ApiProperty({ description: "Ip" })
     @Column()
     ip: string;
 
+    @ApiProperty({ description: "Идентификационная строка клиентского приложения" })
     @Column()
     user_agent: string;
 

@@ -25,7 +25,6 @@ export class TasksService {
 
   async createUserTask(dto: UserTaskDto): Promise<TaskUser> {
     const taskUser = this.taskUserRepository.create(dto);
-    const author = this.getTaskAuthorId(taskUser.task_id, dto.user_id);
     const saveUserTask = await this.taskUserRepository.save(taskUser);
     await this.updateTaskAuthorId(saveUserTask.task_id, dto.user_id, saveUserTask.id);
     return saveUserTask;
@@ -38,16 +37,5 @@ export class TasksService {
     }
     taskAuthor.task_user_id = newTaskUserId;
     await this.taskAuthorRepository.save(taskAuthor);
-  }
-
-
-  async getAllTasksUser() {
-      return this.taskUserRepository.find();
-  }
-
-  async getTaskAuthorId(task_id: number, user_id: number) {
-    const user = this.taskAuthorRepository.findOne({where: { task_id, user_id }})
-    return user;
-
   }
 }

@@ -13,7 +13,8 @@ import { TaskAuthor } from './entities/task_author.entity';
 @Module({
   controllers: [UserController],
   providers: [UserService],
-  imports: [TypeOrmModule.forFeature([User, Profile, UserToken, TaskAuthor]), ProfileModule, forwardRef(() => AuthModule), forwardRef(() => TasksModule)],
+  imports: [TypeOrmModule.forFeature([User, Profile, UserToken, TaskAuthor]), 
+  ProfileModule, forwardRef(() => AuthModule), forwardRef(() => TasksModule)],
   exports: [UserService]
 })
 export class UserModule {}

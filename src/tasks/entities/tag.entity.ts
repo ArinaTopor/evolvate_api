@@ -1,17 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class TaskTag {
-    @ApiProperty({example: "", description:"Id"})
+    @ApiProperty({ description:"Id" })
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty({example: "", description:"Название"})
+    @ApiProperty({ description:"Название" })
     @Column()
     name: string;
 
-    @ApiProperty({example: "", description:"Изображение"})
+    @ApiProperty({ description:"Изображение" })
     @Column()
     image: string;
 
