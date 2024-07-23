@@ -13,10 +13,6 @@ export class ProductImage {
     @Column()
     image: string;
 
-    @ApiProperty({example: "", description:"Изображение"})
-    @Column()
-    image_thumb: string;
-
     @ManyToOne(() => Product, (product)=> product.image)
     @JoinColumn(([
         { name: "product_id" }
