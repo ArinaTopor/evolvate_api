@@ -7,12 +7,13 @@ import { User } from "src/user/entities/user.entity";
 import { ProfileService } from "src/profile/profile.service";
 import { Profile } from "src/profile/entites/profile.entity";
 import { UserToken } from "src/user/entities/user-token.entity";
+import { CreateLoginDto } from "./dto/login.dto";
 @Injectable()
 export class AuthService {
     constructor( private readonly userService: UserService,
         private jwtService: JwtService, private readonly profileService: ProfileService, ) {}
 
-    async login( dto: CreateUserDto ) {
+    async login( dto: CreateLoginDto ) {
         const user = await this.validateUser(dto)
         const token = await this.userService.getTokenById(user.id);
         const accessToken = (await this.refreshAccessToken(token)).toString();
@@ -23,9 +24,9 @@ export class AuthService {
             phone: (await profile).phone, coins_count: (await profile).coins_count };
     }
 
-    private async validateUser(dto: CreateUserDto){
+    private async validateUser(dto: CreateLoginDto){
         const user =  await this.userService.getUserByEmail(dto.email)
-        const passwordEquals = await bcrypt.compare(dto.password_hash, user.password_hash);
+        const passwordEquals = await bcrypt.compare(dto.password, user.password_hash);
         if(user && passwordEquals){
             return user;
         }
