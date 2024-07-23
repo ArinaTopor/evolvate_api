@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Headers, Ip, Post } from "@nestjs/common";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
 import { AuthService } from "./auth.service";
 import { CreateProfileDto } from "src/profile/dto/profile.dto";
@@ -12,7 +12,6 @@ export class AuthController {
 
     constructor(private readonly authService: AuthService) {}
 
-    //Авторизация
     @ApiOperation({summary: 'Авторизация'})
     @ApiResponse({type: User})
     @Post('/login')
@@ -21,9 +20,14 @@ export class AuthController {
     }
 
     @ApiOperation({summary: 'Регистрация'})
-    //Регистрация
     @Post('/registration')
-    registration(@Body() dto: CreateAuthDto) {
-        return this.authService.registration(dto)
+    registration(@Body() dto: CreateAuthDto, @Ip() ip: string, @Headers('user-agent') userAgent: string) {
+        return this.authService.registration({... dto, ip: ip, user_agent: userAgent})
     }
+
+    @ApiOperation({summary: 'Обновление токена'})
+    @Post('/refreshToken')
+    refreshAccessToken(@Body() refreshToken: string) {
+        return this.authService.refreshAccessToken(refreshToken)
+    }   
 }

@@ -31,7 +31,7 @@ export class ProfileController {
   
   @ApiOperation({summary: 'Получение пользователя по почте (для разработки)'})
   @Get(':user_id')
-  getUserByEmail(@Param('user_id') user_id: number) {
+  getProfileById(@Param('user_id') user_id: number) {
     return this.profileService.getProfileById(user_id);
   }
   

@@ -6,11 +6,14 @@ import { User } from './entities/user.entity';
 import { Profile } from 'src/profile/entites/profile.entity';
 import { ProfileModule } from 'src/profile/profile.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { UserToken } from './entities/user-token.entity';
+import { TasksModule } from 'src/tasks/tasks.module';
+import { TaskAuthor } from './entities/task_author.entity';
 
 @Module({
   controllers: [UserController],
   providers: [UserService],
-  imports: [TypeOrmModule.forFeature([User, Profile]), ProfileModule, forwardRef(() => AuthModule)],
+  imports: [TypeOrmModule.forFeature([User, Profile, UserToken, TaskAuthor]), ProfileModule, forwardRef(() => AuthModule), forwardRef(() => TasksModule)],
   exports: [UserService]
 })
 export class UserModule {}

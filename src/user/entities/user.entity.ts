@@ -2,6 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Profile } from 'src/profile/entites/profile.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, OneToMany, JoinTable, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { UserToken } from './user-token.entity';
 
 
 @Entity()

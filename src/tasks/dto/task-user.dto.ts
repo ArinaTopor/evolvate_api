@@ -13,4 +13,6 @@ export class UserTaskDto{
     status: string;
     @ApiProperty({example: "", description:"Id задания"})
     task_id: number;
+    @ApiProperty({example: "", description:"Id пользователя"})
+    user_id: number;
 }

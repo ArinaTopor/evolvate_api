@@ -4,7 +4,7 @@ export class CreateAuthDto {
     @ApiProperty({example: "", description:"Ник"})
     readonly username: string;
     @ApiProperty({example: "", description:"Пароль"})
-    readonly password_hash: string;
+    readonly password: string;
     @ApiProperty({example: "", description:"Фамилия"})
     readonly last_name: string; 
     @ApiProperty({example: "", description:"Имя"})
@@ -21,4 +21,6 @@ export class CreateAuthDto {
     readonly division: string;
     @ApiProperty({example: "", description:"Должность"})
     readonly position: string;
+    readonly ip: string;
+    readonly user_agent: string;
 }

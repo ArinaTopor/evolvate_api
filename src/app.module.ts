@@ -15,6 +15,8 @@ import { ProductImage } from './products/entity/product-image.entity';
 import { Division } from './profile/entites/division.entity';
 import { Variant } from './products/entity/variant.entity';
 import { Cart } from './products/entity/cart.entity';
+import { UserToken } from './user/entities/user-token.entity';
+import { TaskAuthor } from './user/entities/task_author.entity';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { Cart } from './products/entity/cart.entity';
       username: 'root',
       password: '',
       database: 'evo',
-      entities: [User , Task, TaskTag, Profile, TaskUser, Product, ProductImage, Division, Variant, Cart],
+      entities: [User , Task, TaskTag, Profile, TaskUser, Product, ProductImage, Division, Variant, Cart, UserToken, TaskAuthor],
       synchronize: false,
     }),
     UserModule,
