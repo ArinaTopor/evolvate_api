@@ -23,7 +23,7 @@ export class AuthController {
 
     @ApiOperation({summary: 'Обновление токена'})
     @Post('/refreshToken')
-    refreshAccessToken(@Body() refreshToken: string) {
-        return this.authService.refreshAccessToken(refreshToken)
+    async refreshAccessToken(@Body() body: { refreshToken: string })  {
+        return this.authService.refreshAccessToken(body.refreshToken)
     }   
 }

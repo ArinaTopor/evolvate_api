@@ -16,7 +16,7 @@ export class AuthService {
     async login( dto: CreateLoginDto ) {
         const user = await this.validateUser(dto)
         const token = await this.userService.getTokenById(user.id);
-        const accessToken = (await this.refreshAccessToken(token)).toString();
+        const accessToken = (await this.refreshAccessToken(token)).accesssToken;
         const profile = this.profileService.getProfileById(user.id)
         return { accessToken: accessToken, refreshToken: token, 
             username: user.username, email: user.email, 
@@ -43,7 +43,8 @@ export class AuthService {
 
     async refreshAccessToken(refreshToken: string) {
         const user = await this.validateRefreshToken(refreshToken);
-        return this.jwtService.sign({ email: user.email, id: user.id }, { expiresIn: '1d' });
+        const accessToken = this.jwtService.sign({ email: user.email, id: user.id }, { expiresIn: '1d' });
+        return { accesssToken: accessToken }; 
     }
 
     async registration(registerDto: CreateRegistrationDto) {
