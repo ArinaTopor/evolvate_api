@@ -17,12 +17,12 @@ export class TasksController {
 
   @ApiOperation({summary: 'Получение всех категорий'})
   @UseGuards(JwtAuthGuard)
-  @Get('/tag')
+  @Get('/tags')
   findAllTags() {
     return this.tasksService.findAllTags();
   }
 
-  @Get('/tagCount')
+  @Get('/tagsCount')
   findAllIdTags() {
     return this.tasksService.countTags();
   }
