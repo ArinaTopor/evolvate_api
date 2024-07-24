@@ -3,17 +3,13 @@ import { Task } from './entities/task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TaskTag } from './entities/tag.entity';
-import { TaskUser } from './entities/task_user';
-import { UserTaskDto } from './dto/task-user.dto';
-import { TaskAuthor } from 'src/user/entities/task_author.entity';
 
 
 @Injectable() 
 export class TasksService {
   constructor(
     @InjectRepository(Task) private taskRepository: Repository<Task>,  
-    @InjectRepository(TaskTag) private taskTagRepository: Repository<TaskTag>, 
-    @InjectRepository(TaskUser) private taskUserRepository: Repository<TaskUser>, @InjectRepository(TaskAuthor) private taskAuthorRepository: Repository<TaskAuthor>) {}
+    @InjectRepository(TaskTag) private taskTagRepository: Repository<TaskTag>, ) {}
 
   async findAllTasks(): Promise<Task[]>{
     return this.taskRepository.find();
@@ -23,19 +19,24 @@ export class TasksService {
     return this.taskTagRepository.find();
   }
 
-  async createUserTask(dto: UserTaskDto): Promise<TaskUser> {
-    const taskUser = this.taskUserRepository.create(dto);
-    const saveUserTask = await this.taskUserRepository.save(taskUser);
-    await this.updateTaskAuthorId(saveUserTask.task_id, dto.user_id, saveUserTask.id);
-    return saveUserTask;
-  }
-
-  async updateTaskAuthorId(taskId: number, userId: number, newTaskUserId: number) {
-    const taskAuthor = await this.taskAuthorRepository.findOne({ where: { task_id: taskId, user_id: userId } });
-    if (!taskAuthor) {
-        throw new NotFoundException(`Task author with task ID ${taskId} and user ID ${userId} not found.`);
+  async getTagIds() {
+    const tags = this.findAllTags();
+    const ids = [];
+    for (const task of await(tags)){
+      ids.push(task.id);
     }
-    taskAuthor.task_user_id = newTaskUserId;
-    await this.taskAuthorRepository.save(taskAuthor);
+    return ids;
+  }
+  
+  async countTags() {
+    const tagIds = this.getTagIds();
+    const p = [];
+    for (const id of await(tagIds)){
+      const query = this.taskRepository.createQueryBuilder('Task');
+      query.where('tag_id = :tagId', { tagId: id });
+      const count = await query.getCount();
+      p.push({id, count})
+    }
+    return p;
   }
 }

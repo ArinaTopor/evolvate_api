@@ -4,7 +4,7 @@ import { TasksController } from './tasks.controller';
 import { Task } from './entities/task.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskTag } from './entities/tag.entity';
-import { TaskUser } from './entities/task_user';
+import { TaskUser } from '../user/entities/task_user';
 import { AuthModule } from 'src/auth/auth.module';
 import { TaskAuthor } from '../user/entities/task_author.entity';
 import { UserModule } from 'src/user/user.module';

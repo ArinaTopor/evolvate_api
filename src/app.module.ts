@@ -8,7 +8,7 @@ import { TaskTag } from './tasks/entities/tag.entity';
 import { ProfileModule } from './profile/profile.module';
 import { Profile } from './profile/entites/profile.entity';
 import { AuthModule } from './auth/auth.module';
-import { TaskUser } from './tasks/entities/task_user';
+import { TaskUser } from './user/entities/task_user';
 import { ProductModule } from './products/products.model';
 import { Product } from './products/entity/products.entity';
 import { ProductImage } from './products/entity/product-image.entity';

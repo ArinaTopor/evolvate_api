@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { UserTaskDto } from './dto/task-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
@@ -8,13 +7,6 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService, ) {}
-
-  @ApiOperation({summary: 'Выполнение задачи'})
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() dto: UserTaskDto) {
-    return this.tasksService.createUserTask(dto);
-  }
 
   @ApiOperation({summary: 'Получение всех задач'})
   @UseGuards(JwtAuthGuard)
@@ -28,5 +20,10 @@ export class TasksController {
   @Get('/tag')
   findAllTags() {
     return this.tasksService.findAllTags();
+  }
+
+  @Get('/tagCount')
+  findAllIdTags() {
+    return this.tasksService.countTags();
   }
 }

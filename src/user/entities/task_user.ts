@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
-import { Task } from "./task.entity";
+import { Task } from "../../tasks/entities/task.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()

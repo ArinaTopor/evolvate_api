@@ -7,7 +7,7 @@ import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, One
 export class User {
 
   @ApiProperty({ description:"Id" })
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id: number;
 
   @ApiProperty({ description: "Никнейм" })

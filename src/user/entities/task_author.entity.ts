@@ -19,6 +19,10 @@ export class TaskAuthor {
     @Column()
     task_user_id: number;
 
+    @ApiProperty({ description: "Автор/соавтор"})
+    @Column()
+    is_author: number;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 	created_at: number;	
 

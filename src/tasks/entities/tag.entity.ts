@@ -14,5 +14,5 @@ export class TaskTag {
     @ApiProperty({ description:"Изображение" })
     @Column()
     image: string;
-
 }
+

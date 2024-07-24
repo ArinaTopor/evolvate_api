@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinTable, OneToMany } from "typeorm";
 import { TaskTag } from "./tag.entity";
-import { TaskUser } from "./task_user";
+import { TaskUser } from "../../user/entities/task_user";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
