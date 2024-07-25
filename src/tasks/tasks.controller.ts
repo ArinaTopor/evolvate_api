@@ -22,6 +22,8 @@ export class TasksController {
     return this.tasksService.findAllTags();
   }
 
+  @ApiOperation({summary: 'Получение количества категорий'})
+  @UseGuards(JwtAuthGuard)
   @Get('/tagsCount')
   findAllIdTags() {
     return this.tasksService.countTags();
