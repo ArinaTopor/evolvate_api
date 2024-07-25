@@ -18,7 +18,7 @@ export class AuthService {
         const token = await this.userService.getTokenById(user.id);
         const accessToken = (await this.refreshAccessToken(token)).accesssToken;
         const profile = this.profileService.getProfileById(user.id)
-        return { accessToken: accessToken, refreshToken: token, 
+        return { accessToken: accessToken, refreshToken: token, user_id: user.id,
             username: user.username, email: user.email, 
             last_name: (await profile).last_name, first_name: (await profile).first_name, 
             phone: (await profile).phone, coins_count: (await profile).coins_count };
