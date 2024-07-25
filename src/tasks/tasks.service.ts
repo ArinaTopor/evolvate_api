@@ -39,4 +39,9 @@ export class TasksService {
     }
     return p;
   }
+
+  async getTaskById(id: number) {
+    const user = this.taskRepository.findOne({where: { id } })
+    return user;
+  }
 }

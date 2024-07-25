@@ -7,14 +7,18 @@ import { Cart } from './entity/cart.entity';
 
 
 @Injectable() 
-export class ProDuctService {
+export class ProductService {
     constructor(@InjectRepository(Product) private productRepository: Repository<Product>, @InjectRepository(Cart) private cartRepository: Repository<Cart>) {}
 
     async getAllProducts() {
         return this.productRepository.find({relations: {image: true, variant: true}});
     }
 
-    async createCart(dto: CreateCartDto) {
-        return await this.cartRepository.save(dto);
-    }     
+    async createCarts(createCartDtos: [CreateCartDto]) {
+        const carts = [];
+        for (const createCartDto of createCartDtos) {
+            const savecart = this.cartRepository.create(createCartDto)
+            await this.cartRepository.save(savecart);
+        }
+    }
 }

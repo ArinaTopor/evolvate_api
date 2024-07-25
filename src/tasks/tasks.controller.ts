@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -27,5 +27,12 @@ export class TasksController {
   @Get('/tagsCount')
   findAllIdTags() {
     return this.tasksService.countTags();
+  }
+
+  @ApiOperation({summary: 'Получение задачи по ID'})
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  getTaskById(@Param('id') id: number) {
+    return this.tasksService.getTaskById(id);
   }
 }
