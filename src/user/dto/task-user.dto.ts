@@ -1,12 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsNumber, IsString } from "class-validator";
 
 export class UserTaskDto {
-    @ApiProperty({ description:"Изображение" })
+    @ApiPropertyOptional({ description:"Изображение" })
     image: any;
-    @ApiProperty({ description:"Видео" })
+    @ApiPropertyOptional({ description:"Видео" })
     video: any;
-    @ApiProperty({ description:"Сообщение" })
+    @ApiPropertyOptional({ description:"Сообщение" })
     message: string; 
     @IsNumber()
     @ApiProperty({ description:"Статус" })
@@ -17,6 +17,6 @@ export class UserTaskDto {
     @IsNumber()
     @ApiProperty({ description:"Id пользователя" })
     user_id: number;
-    @ApiProperty({ description:"Id пользователя" })
+    @ApiPropertyOptional({ description:"Id пользователя" })
     emails: [string];
 }
