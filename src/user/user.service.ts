@@ -47,9 +47,11 @@ export class UserService {
     const taskUser = this.taskUserRepository.create(dto);
     const saveUserTask = await this.taskUserRepository.save(taskUser);
     await this.updateTaskAuthorId(saveUserTask.task_id, dto.user_id, saveUserTask.id, 1);
-    for( let i = 0; i < dto.emails.length; i++ ) {
-      const user = this.getUserByEmail(dto.emails[i]);
-      await this.updateTaskAuthorId(saveUserTask.task_id, (await user).id, saveUserTask.id, 2)
+    if(dto.emails){
+      for( let i = 0; i < dto.emails.length; i++ ) {
+        const user = this.getUserByEmail(dto.emails[i]);
+        await this.updateTaskAuthorId(saveUserTask.task_id, (await user).id, saveUserTask.id, 2)
+      }
     }
     return saveUserTask;
   }
