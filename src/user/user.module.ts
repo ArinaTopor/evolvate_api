@@ -10,12 +10,13 @@ import { UserToken } from './entities/user-token.entity';
 import { TasksModule } from 'src/tasks/tasks.module';
 import { TaskAuthor } from './entities/task_author.entity';
 import { TaskUser } from 'src/user/entities/task_user';
+import { NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
   controllers: [UserController],
   providers: [UserService],
   imports: [TypeOrmModule.forFeature([User, Profile, UserToken, TaskAuthor, TaskUser]), 
-  ProfileModule, forwardRef(() => AuthModule), forwardRef(() => TasksModule)],
+  ProfileModule, forwardRef(() => AuthModule), forwardRef(() => TasksModule), NestjsFormDataModule],
   exports: [UserService]
 })
 export class UserModule {}

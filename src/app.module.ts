@@ -18,6 +18,7 @@ import { Cart } from './products/entity/cart.entity';
 import { UserToken } from './user/entities/user-token.entity';
 import { TaskAuthor } from './user/entities/task_author.entity';
 import { ConfigModule } from '@nestjs/config';
+import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { ConfigModule } from '@nestjs/config';
       entities: [User , Task, TaskTag, Profile, TaskUser, Product, ProductImage, Division, Variant, Cart, UserToken, TaskAuthor],
       synchronize: false,
     }),
+    NestjsFormDataModule.config({ storage: MemoryStoredFile }),
     UserModule,
     TasksModule,
     ProfileModule, 

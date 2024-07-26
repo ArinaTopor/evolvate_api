@@ -5,6 +5,7 @@ import { ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserTaskDto } from 'src/user/dto/task-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { saveImageToStorage }  from 'src/user/multer.config';
+import { FormDataRequest, MemoryStoredFile } from 'nestjs-form-data';
 
 @ApiTags('Пользователь')
 @Controller('user')
@@ -14,21 +15,17 @@ export class UserController {
   @ApiOperation({summary: 'Выполнение задачи'})
   @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
+  @FormDataRequest()
   @Post('/userTask')
-  @UseInterceptors(FileInterceptor('file'))
-  create(@Body() dto: UserTaskDto, @UploadedFile() image: undefined | Express.Multer.File, @UploadedFile() video: undefined | Express.Multer.File ) {
+  @UseInterceptors(FileInterceptor('image', saveImageToStorage))
+  create(@Body() dto: UserTaskDto, @UploadedFile() image: undefined | Express.Multer.File) {
     if(image) {
       const stringFile =  image.buffer.toString()
       return this.userService.createUserTask({...dto, image: stringFile} );
     }
-    if(video) {
-      const stringFile =  video.buffer.toString()
-      return this.userService.createUserTask({...dto, video: stringFile} );
-    }
     else {
       return this.userService.createUserTask(dto);
-    }    
+    }
   }
 }
-
 
