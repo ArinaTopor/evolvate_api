@@ -3,9 +3,9 @@ import { IsNumber, IsString } from "class-validator";
 
 export class UserTaskDto {
     @ApiProperty({ description:"Изображение" })
-    image: string;
+    image: any;
     @ApiProperty({ description:"Видео" })
-    video: string;
+    video: any;
     @ApiProperty({ description:"Сообщение" })
     message: string; 
     @IsNumber()
