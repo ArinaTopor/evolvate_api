@@ -19,7 +19,6 @@ export class ProductController {
   }
 
   @ApiOperation({summary: 'Оформление заказа'})
-  @UsePipes(ValidationPipe)
   @UseGuards(JwtAuthGuard)
   @Post('/carts')
   createCarts(@Body() dto: [CreateCartDto]) {

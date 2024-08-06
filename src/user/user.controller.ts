@@ -1,12 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Ip, Headers, UseInterceptors, UploadedFile, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserTaskDto } from 'src/user/dto/task-user.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { saveImageToStorage }  from 'src/user/multer.config';
-import { FormDataRequest, MemoryStoredFile } from 'nestjs-form-data';
-
+import { saveMediaToStorage } from './multer.config';
+import { FormDataRequest } from 'nestjs-form-data';
 @ApiTags('Пользователь')
 @Controller('user')
 export class UserController {
@@ -14,17 +12,19 @@ export class UserController {
 
   @ApiOperation({summary: 'Выполнение задачи'})
   @UseGuards(JwtAuthGuard)
-  @UsePipes(ValidationPipe)
   @FormDataRequest()
   @Post('/userTask')
-  @UseInterceptors(FileInterceptor('image', saveImageToStorage))
-  create(@Body() dto: UserTaskDto, @UploadedFile() image: undefined | Express.Multer.File) {
-    if(image) {
-      const stringFile =  image.buffer.toString()
-      return this.userService.createUserTask({...dto, image: stringFile} );
+  async create(@Body() dto: UserTaskDto) { 
+    if(dto.image) {
+      const image = await saveMediaToStorage(dto.image, "image");
+      return this.userService.createUserTask({...dto, image: image});
+    }
+    if(dto.video) {
+      const video = await saveMediaToStorage(dto.video, "video");
+      return this.userService.createUserTask({...dto, video: video });
     }
     else {
-      return this.userService.createUserTask(dto);
+      return this.userService.createUserTask({...dto});
     }
   }
 }

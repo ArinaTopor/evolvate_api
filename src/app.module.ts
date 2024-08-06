@@ -19,6 +19,7 @@ import { UserToken } from './user/entities/user-token.entity';
 import { TaskAuthor } from './user/entities/task_author.entity';
 import { ConfigModule } from '@nestjs/config';
 import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
     ProfileModule, 
     AuthModule, 
     ProductModule,
+    MulterModule
   ],
   controllers: [],
   providers: []
