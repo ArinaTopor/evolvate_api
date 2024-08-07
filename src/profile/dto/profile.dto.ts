@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsMobilePhone, IsNumber, isPhoneNumber, IsString } from "class-validator";
+import { IsEmail, IsMobilePhone, IsNumber, IsString } from "class-validator";
 
 export class CreateProfileDto {
 	@IsNumber()

@@ -1,6 +1,4 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsNumber, IsString } from "class-validator";
-import { FileSystemStoredFile } from "nestjs-form-data";
 
 export class UserTaskDto {
     @ApiProperty({ description:"Изображение" })

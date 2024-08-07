@@ -7,8 +7,6 @@ import { ValidationPipe } from './pipes/validation.pipe';
 async function start() {
   const PORT = process.env.PORT
   const app = await NestFactory.create(AppModule, { cors: true });
-
-
   const config = new DocumentBuilder()
     .setTitle('Evolvate API')
     .setDescription('Документация')
@@ -18,7 +16,7 @@ async function start() {
   SwaggerModule.setup('/api/docs', app, document);
 
   app.useGlobalPipes(new ValidationPipe())
-  
+
   await app.listen(PORT, () => console.log(`Server start port = ${PORT}`));
 }
 start();
