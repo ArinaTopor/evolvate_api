@@ -1,26 +1,47 @@
-import { Injectable } from '@nestjs/common';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Task } from './entities/task.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TaskTag } from './entities/tag.entity';
 
-@Injectable()
+
+@Injectable() 
 export class TasksService {
-  create(createTaskDto: CreateTaskDto) {
-    return 'This action adds a new task';
+  constructor(
+    @InjectRepository(Task) private taskRepository: Repository<Task>,  
+    @InjectRepository(TaskTag) private taskTagRepository: Repository<TaskTag>, ) {}
+
+  async findAllTasks(): Promise<Task[]>{
+    return this.taskRepository.find();
   }
 
-  findAll() {
-    return `This action returns all tasks`;
+  async findAllTags() {
+    return this.taskTagRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async getTagIds() {
+    const tags = this.findAllTags();
+    const ids = [];
+    for (const task of await(tags)){
+      ids.push(task.id);
+    }
+    return ids;
+  }
+  
+  async countTags() {
+    const tagIds = this.getTagIds();
+    const p = [];
+    for (const id of await(tagIds)){
+      const query = this.taskRepository.createQueryBuilder('Task');
+      query.where('tag_id = :tagId', { tagId: id });
+      const count = await query.getCount();
+      p.push({id, count})
+    }
+    return p;
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  async getTaskById(id: number) {
+    const user = this.taskRepository.findOne({where: { id } })
+    return user;
   }
 }
