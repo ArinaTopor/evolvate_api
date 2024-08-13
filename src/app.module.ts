@@ -25,7 +25,7 @@ import { MulterModule } from '@nestjs/platform-express';
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env'
-   }),
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.MYSQL_HOST,
